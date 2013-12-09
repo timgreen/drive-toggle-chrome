@@ -1,0 +1,14 @@
+{
+  "manifest_version": 2,
+
+  "name": "Google Drive Edit/Preview Toggle",
+  "description": "Quick toggle edit/preview mode for Google Drive via page action.",
+  "version": "1.0",
+  "background": { "scripts": ["background.js"] },
+  "permissions" : [
+    "tabs"
+  ],
+  "page_action": {
+    "default_title": "click to toggle."
+  }
+}
