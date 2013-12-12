@@ -4,6 +4,7 @@ var parts = {
   fileType:  '(document|presentation|drawings)/d/',
   docId:     '([a-zA-Z0-9-_]+)/',
   mode:      '(view|edit|preview)',
+  query:     '(\\?[^#]*)?',
   fragment:  '(#.*)?'
 };
 
@@ -14,6 +15,7 @@ var pattern = new RegExp(
     parts.fileType +
     parts.docId +
     parts.mode +
+    parts.query +
     parts.fragment +
     '$');
 
@@ -41,7 +43,8 @@ function reload(matches, tab) {
       matches[2] + '/d/' +  // fileType
       matches[3] + '/'   +  // docId
       matches[4] +          // mode
-      (matches[5] || '');   // fragment
+      (matches[5] || '') +  // query
+      (matches[6] || '');   // fragment
 
   chrome.tabs.update(tab.id, {url: url});
 }
