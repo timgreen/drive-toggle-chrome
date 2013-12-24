@@ -1,7 +1,7 @@
 var parts = {
   prefix:    'https://docs\\.google\\.com/',
   appDomain: '(a/[^/]+/)?',
-  fileType:  '(document|presentation|drawings)/d/',
+  fileType:  '(document|presentation|drawings|spreadsheets)/d/',
   docId:     '([a-zA-Z0-9-_]+)/',
   mode:      '(view|edit|preview)',
   query:     '(\\?[^#]*)?',
