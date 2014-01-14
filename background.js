@@ -3,7 +3,7 @@ var parts = {
   appDomain: '(a/[^/]+/)?',
   fileType:  '(document|presentation|drawings|spreadsheets)/d/',
   docId:     '([a-zA-Z0-9-_]+)/',
-  mode:      '(view|edit|preview)',
+  mode:      '(view|edit|preview|comment)',
   query:     '(\\?[^#]*)?',
   fragment:  '(#.*)?'
 };
@@ -23,7 +23,8 @@ var MODE = {
   INVALID: 0,
   VIEW:    1,
   PREVIEW: 2,
-  EDIT:    3
+  EDIT:    3,
+  COMMENT:  4
 };
 
 function getMode(matches) {
@@ -32,6 +33,7 @@ function getMode(matches) {
       case 'view': return MODE.VIEW;
       case 'preview': return MODE.PREVIEW;
       case 'edit': return MODE.EDIT;
+      case 'comment': return MODE.COMMENT;
     }
   }
   return MODE.INVALID;
@@ -62,6 +64,7 @@ function checkForGoogleDriveUrl(tabId, changeInfo, tab) {
       break;
     case MODE.PREVIEW:
     case MODE.VIEW:
+    case MODE.COMMENT:
       chrome.pageAction.setIcon({path: 'view.png', tabId: tab.id});
       chrome.pageAction.show(tabId);
       break;
@@ -78,6 +81,7 @@ function onClicked(tab) {
       break;
     case MODE.PREVIEW:
     case MODE.VIEW:
+    case MODE.COMMENT:
       matches[4] = 'edit';
       reload(matches, tab);
       break;
